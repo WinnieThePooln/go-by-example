@@ -17,16 +17,19 @@ type DictRequest struct {
 
 func main() {
 	client := &http.Client{}
+	//通过JSON序列化成字符串 来填充request里的body
 	request := DictRequest{TransType: "en2zh", Source: "good"}
 	buf, err := json.Marshal(request)
 	if err != nil {
 		log.Fatal(err)
 	}
 	var data = bytes.NewReader(buf)
+	fmt.Println(data)
 	req, err := http.NewRequest("POST", "https://api.interpreter.caiyunai.com/v1/dict", data)
 	if err != nil {
 		log.Fatal(err)
 	}
+	//其他部分是和v1一样的
 	req.Header.Set("Connection", "keep-alive")
 	req.Header.Set("DNT", "1")
 	req.Header.Set("os-version", "")

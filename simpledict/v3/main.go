@@ -50,6 +50,7 @@ type DictResponse struct {
 
 func main() {
 	client := &http.Client{}
+	//JSON序列化 得到req的body
 	request := DictRequest{TransType: "en2zh", Source: "good"}
 	buf, err := json.Marshal(request)
 	if err != nil {

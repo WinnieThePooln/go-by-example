@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	//"os"
-	"strconv"
+	//"strconv"
 	//"strings"
 	"time"
 )
@@ -19,9 +19,9 @@ func main() {
 	fmt.Println("Please input your guess")
 	//reader := bufio.NewReader(os.Stdin)
 	for {
-		var input string
+		var input int
 		 
-		cnt, err := fmt.Scanf("%s", &input)
+		cnt, err := fmt.Scanf("%d", &input)
 		fmt.Println("the number of input : ", cnt)
 		if err != nil {
 			fmt.Println("An error occured while reading input. Please try again", err)
@@ -29,15 +29,15 @@ func main() {
 		}
 		//input = strings.TrimSuffix(input, "\n")
 
-		guess, err := strconv.Atoi(input)
+		//guess, err := strconv.Atoi(input)
 		if err != nil {
 			fmt.Println("Invalid input. Please enter an integer value")
 			continue
 		}
-		fmt.Println("You guess is", guess)
-		if guess > secretNumber {
+		fmt.Println("You guess is", input)
+		if input > secretNumber {
 			fmt.Println("Your guess is bigger than the secret number. Please try again")
-		} else if guess < secretNumber {
+		} else if input < secretNumber {
 			fmt.Println("Your guess is smaller than the secret number. Please try again")
 		} else {
 			fmt.Println("Correct, you Legend!")

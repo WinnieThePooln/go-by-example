@@ -1,3 +1,4 @@
+
 package main
 
 import (
@@ -11,10 +12,12 @@ import (
 func main() {
 	client := &http.Client{}
 	var data = strings.NewReader(`{"trans_type":"en2zh","source":"good"}`)
+	//创建post请求
 	req, err := http.NewRequest("POST", "https://api.interpreter.caiyunai.com/v1/dict", data)
 	if err != nil {
 		log.Fatal(err)
 	}
+	//设置header 通过curl 转代码 网页生成
 	req.Header.Set("Connection", "keep-alive")
 	req.Header.Set("DNT", "1")
 	req.Header.Set("os-version", "")
@@ -33,14 +36,18 @@ func main() {
 	req.Header.Set("Referer", "https://fanyi.caiyunapp.com/")
 	req.Header.Set("Accept-Language", "zh-CN,zh;q=0.9")
 	req.Header.Set("Cookie", "_ym_uid=16456948721020430059; _ym_d=1645694872")
+
+	//发起请求
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
 	}
+	//关闭流 并读取相应
 	defer resp.Body.Close()
 	bodyText, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("%s\n", bodyText)
+	
 }
